@@ -1,0 +1,42 @@
+body{
+    margin-top: 2%;
+}
+/*Configurando área de nav lateral*/
+#navbar{
+    float: left;
+    width: 20%;
+    margin: 0;
+    padding: 0;
+}
+#navbar ul li {
+    margin: 0; padding: 0px;
+    border-bottom: 1px solid #CCC;
+    text-align: left;
+    list-style-type: none;
+    }
+#navbar a:link {
+    background: #F5F5F5;
+    color: #666;
+    font-weight: bold;
+    text-decoration: none;
+    padding: 8px;
+    display: block;
+    }
+#navbar a:hover {
+    background: #E5F0FF;
+    color: #039;
+    }
+/*Conteudo*/
+#content{
+    float: right;
+    width: 80%;
+}
+
+/*Section Introdution*/
+#introduction header{
+    margin-top: 7%;
+    font-size: 25px;
+}
+
+
+
