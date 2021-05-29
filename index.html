@@ -88,6 +88,24 @@
                             <li>Fundos de Inflação</li>
                             <li>Dados de BTC de ações</li>
                             <li>Gráfico com pagadores de dividendos</li>
+                            <p>nesse paragrafo mostro os comandos para coletar dados com Data Science</p>
+                            <code>
+                                import investpy as inv
+                                import pandas as pd
+                                import seaborn as sns
+                                import matplotlib.pyplot as plt
+                                import matplotlib
+                                import sqlalchemy
+                                import pymysql
+                                import os
+
+                                <p>Abrir banco de dados</p>
+                                engine = sqlalchemy.create_engine('mysql+pymysql://admin:XXXXXX@YYYYYYYYYYYY/ZZZZZZZZZZ')
+
+                                <p>Coletando</p>
+                                fundos_br = inv.get_funds_list(country='Brazil')
+
+                            </code>
                         </article>
                         <br>
                     </section>
@@ -116,6 +134,131 @@
                             <li>Valor</li>
                             <p>Importe fazer o cálculo de quanto a empresa paga anualmente, dividedos anuais inferior a
                                 6% não valem a pena.</p>
+                                <code>
+                                    url[4] = url[4].transpose()
+                                    url[5] = url[5].transpose()
+                                    url[6] = url[6].transpose()
+
+                                    url[7]= url[7].transpose()
+                                    url[8]= url[8].transpose()
+                                    url[9]= url[9].transpose()
+                                    url[10]= url[10].transpose()
+                                    url[11]= url[11].transpose()
+                                    url[12]= url[12].transpose()
+                                    url[13]= url[13].transpose()
+                                    url[14]= url[14].transpose()
+                                    url[15]= url[15].transpose()
+                                    url[16]= url[16].transpose()
+                                    url[17]= url[17].transpose()
+                                    url[18]= url[18].transpose()
+                                    url[19]= url[19].transpose()
+                                    url[20]= url[20].transpose()
+                                    url[21]= url[21].transpose()
+
+
+                                    informacoes_0 = url[4].iloc[:,0:7]
+                                    informacoes_1 = url[5].iloc[:,0:7]
+                                    informacoes_2 = url[6].iloc[:,0:7]
+
+                                    informacoes_3 = url[7].iloc[:,0:7]
+                                    informacoes_4 = url[8].iloc[:,0:7]
+                                    informacoes_5 = url[9].iloc[:,0:7]
+                                    informacoes_6 = url[10].iloc[:,0:7]
+                                    informacoes_7 = url[11].iloc[:,0:7]
+                                    informacoes_8 = url[12].iloc[:,0:7]
+                                    informacoes_9 = url[13].iloc[:,0:7]
+                                    informacoes_10 = url[14].iloc[:,0:7]
+                                    informacoes_11= url[15].iloc[:,0:7]
+                                    informacoes_12= url[16].iloc[:,0:7]
+                                    informacoes_13= url[17].iloc[:,0:7]
+                                    informacoes_14= url[18].iloc[:,0:7]
+                                    informacoes_15= url[19].iloc[:,0:7]
+                                    informacoes_16= url[20].iloc[:,0:7]
+                                    informacoes_17= url[21].iloc[:,0:7]
+
+
+
+                                    informacoes_0 = informacoes_0.reset_index(drop=True)
+                                    informacoes_1 = informacoes_1.reset_index(drop=True)
+                                    informacoes_2 = informacoes_2.reset_index(drop=True)
+                                    informacoes_3 = informacoes_3.reset_index(drop=True)
+                                    informacoes_4 = informacoes_4.reset_index(drop=True)
+                                    informacoes_5 = informacoes_5.reset_index(drop=True)
+                                    informacoes_6 = informacoes_6.reset_index(drop=True)
+                                    informacoes_7 = informacoes_7.reset_index(drop=True)
+                                    informacoes_8 = informacoes_8.reset_index(drop=True)
+                                    informacoes_9 = informacoes_9.reset_index(drop=True)
+                                    informacoes_10 = informacoes_10.reset_index(drop=True)
+                                    informacoes_11= informacoes_11.reset_index(drop=True)
+                                    informacoes_12= informacoes_12.reset_index(drop=True)
+                                    informacoes_13= informacoes_13.reset_index(drop=True)
+                                    informacoes_14= informacoes_14.reset_index(drop=True)
+                                    informacoes_15= informacoes_15.reset_index(drop=True)
+                                    informacoes_16= informacoes_16.reset_index(drop=True)
+                                    informacoes_17= informacoes_17.reset_index(drop=True)
+
+
+
+
+                                    url = pd.concat([
+                                                    informacoes_0,
+                                                    informacoes_1,
+                                                    informacoes_2,
+                                                    informacoes_3,
+                                                    informacoes_4,
+                                                    informacoes_5,
+                                                    informacoes_6,
+                                                    informacoes_7,
+                                                    informacoes_8,
+                                                    informacoes_9,
+                                                    informacoes_10,
+                                                    informacoes_11,
+                                                    informacoes_12,
+                                                    informacoes_13,
+                                                    informacoes_14,
+                                                    informacoes_15,
+                                                    informacoes_16,
+                                                    informacoes_17
+                                                    ], 
+                                                    join="inner")
+
+                                    tabela = tabela.append(url)
+                                    tabela = tabela.reset_index(drop=True)
+
+
+
+                                    tabela = tabela.drop(columns=['Data da aprovação AGE'])
+
+                                    tabela = tabela.rename(columns={'símbolo': 'Empresa',
+                                                                    'Tipo de pagamento': 'Tipo', 
+                                                                    'Data Ex':'DataEx',
+                                                                    'Previsão de pagamento':'PrevPag'
+                                                                })
+
+
+                                    tabela.columns=["Empresa","Tipo","DataEx","PrevPag","Valor","Valor2"]
+                                    tabela = tabela.iloc[:,0:6]
+
+                                    #tabela['Valor'] = tabela['Valor'].str[:7] Encurtar a string
+                                    tabela['Valor'] = tabela['Valor'].str.extract(r'(\d,\d+)') #usando o REGEX para deixar apenas numeros
+                                    tabela['Valor'] = tabela['Valor'].str.replace(",", ".") #ajustando para converter para float
+                                    tabela['Valor'] = tabela['Valor'].astype(float) #Convertento para float
+                                    tabela['Valor'] = round(tabela['Valor'],3)
+
+                                    tabela['Valor2'] = tabela['Valor2'].str.extract(r'(\d,\d+)')
+                                    tabela['Valor2'] = tabela['Valor2'].str.replace(",", ".")
+                                    tabela['Valor2'] = tabela['Valor2'].astype(float)
+                                    tabela['Valor2'] = round(tabela['Valor2'],3)
+
+
+                                    #tabela['Empresa'] = tabela['Empresa'].str[0:5]
+                                    #tabela['DataEx'] = tabela['DataEx'].str[-22:]
+                                    #tabela['PrevPag'] = tabela['PrevPag'].str[-22:]
+
+
+                                    new_tipo = {"Juros Sobre Capital Próprio":'JCP', "Dividendo":'Div'}
+                                    tabela['Tipo'] = tabela['Tipo'].map(new_tipo)
+                                </code>
                         </article>
                     </section>
                     <section class="main-section" id="Usando_dados_para_sua_estratégias">
@@ -145,6 +288,55 @@
                             <li>VPA</li>
                             <li>P/VPA</li>
                             <li>Lucro por Ação</li>
+                            <code>
+                                acao[0] = acao[0].transpose()
+                                acao[1] = acao[1].transpose()
+                                acao[2] = acao[2].transpose()
+                                acao[3] = acao[3].transpose()
+                                acao[4] = acao[4].transpose()
+                                acao[5] = acao[5].transpose()
+                                acao[6] = acao[6].transpose()
+                                acao[7] = acao[7].transpose()
+                                
+                                informacoes_0 = acao[0].iloc[:2]
+                                informacoes_1 = acao[1].iloc[:2, 5:13]
+                                informacoes_2 = acao[2].iloc[:2]
+                                informacoes_3 = acao[3].iloc[:2]
+                                informacoes_4 = acao[4].iloc[:2]
+                                informacoes_5 = acao[5].iloc[:2]
+                                informacoes_6 = acao[6].iloc[:2]
+                                informacoes_7 = acao[7].iloc[:2]
+                        
+                        
+                                informacoes_0 = informacoes_0.reset_index(drop=True)
+                                informacoes_1 = informacoes_1.reset_index(drop=True)
+                                informacoes_2 = informacoes_2.reset_index(drop=True)
+                                informacoes_3 = informacoes_3.reset_index(drop=True)
+                                informacoes_4 = informacoes_4.reset_index(drop=True)
+                                informacoes_5 = informacoes_5.reset_index(drop=True)
+                                informacoes_6 = informacoes_6.reset_index(drop=True)
+                                informacoes_7 = informacoes_7.reset_index(drop=True)
+                                #display(informacoes_1)
+                                
+                        
+                                acao = pd.concat([informacoes_1,informacoes_2,informacoes_4,informacoes_6], axis = 1, join='inner')
+                        
+                                acao.columns = acao.iloc[0]
+                                acao = acao.drop(0)
+                        
+                                tabela_acoes = tabela_acoes.append(acao)
+                        
+                        
+                            #Tratando os dados
+                        
+                            tabela_acoes = tabela_acoes.reset_index(drop=True)
+                        
+                            novo_cabecalho = [coluna.replace("Valor Patrimonial da Ação", "VPA") for coluna in tabela_acoes.columns]
+                            tabela_acoes.columns = novo_cabecalho
+                        
+                            tabela_acoes = tabela_acoes.rename(columns={'Ação': 'Acao' , 'Último Fechamento': 'Fechamento' , 'Preço/VPA':'Preco/VPA' , 'Lucro/Ação': 'Lucro/Acao' , 'Lucro Líquido':'Lucro Liquido' , 'Preço/Capital Giro': 'Preco/Capital Giro'})
+                        
+                            </code>
                         </article>
                         <br>
                     </section>
@@ -160,6 +352,16 @@
                             <h6>Pontos de atenção:</h6>
                             <li>Simulador de estratégia</li>
                             <li>Blog do Chris</li>
+                            <code>
+                                DOCTYPE html>
+                                    html lang="en"
+
+                                    head
+                                        meta charset="UTF-8"
+                                        meta http-equiv="X-UA-Compatible" content="IE=edge"
+                                        meta name="viewport" content="width=device-width, initial-scale=1.0"
+                                    /head    
+                            </code>
                         </article>
                     </section>
                 </div>
